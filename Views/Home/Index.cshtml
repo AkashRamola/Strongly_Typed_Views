@@ -1,0 +1,25 @@
+﻿@* @{
+    ViewData["Title"] = "Home Page";
+}
+
+@model List<Strongly_Typed_Views.Models.Employee>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@* <h3>ID = @Model.Id</h3>
+<h3>Name=@Model.Name</h3>
+<h3>@Model.Role</h3>
+<h3>@Model.Salary</h3> *@
+
+@* @{
+    foreach (Employee item in Model)
+    {
+        <h3>ID = @item.Id</h3>
+        <h3>Name=@item.Name</h3>
+        <h3>@item.Role</h3>
+        <h3>@item.Salary</h3>
+    }
+} *@
