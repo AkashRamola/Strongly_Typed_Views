@@ -1,0 +1,350 @@
+﻿@{
+    ViewData["Title"] = "Employee Page";
+}
+
+@model IEnumerable<Strongly_Typed_Views.Models.Employee>
+
+<style>
+
+    body {
+        background-color: #f5f7fb;
+        font-family: Arial, sans-serif;
+    }
+
+    .employee-container {
+        width: 100%;
+        max-width: 1400px;
+        margin: 50px auto;
+    }
+
+    /* Header */
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+        .header h2 {
+            margin: 0;
+            font-size: 30px;
+            color: #1f2937;
+        }
+
+        .header p {
+            margin: 5px 0 0;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+    /* Card */
+
+    .table-card {
+        background-color: white;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        overflow-x: auto;
+    }
+
+    /* Table */
+
+    .employee-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .employee-table thead {
+            background-color: #f1f5f9;
+        }
+
+        .employee-table th {
+            padding: 15px;
+            text-align: center;
+            font-size: 14px;
+            color: #374151;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .employee-table td {
+            padding: 15px;
+            text-align: center;
+            color: #4b5563;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .employee-table tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+            .employee-table tbody tr:hover {
+                background-color: #f8fafc;
+            }
+
+            .employee-table tbody tr:last-child td {
+                border-bottom: none;
+            }
+
+    /* Serial Number */
+
+    .serial-number {
+        font-weight: bold;
+        color: #6b7280;
+    }
+
+    /* Employee Name */
+
+    .employee-name {
+        font-weight: 600;
+        color: #111827;
+    }
+
+    /* Role */
+
+    .role-badge {
+        display: inline-block;
+        padding: 5px 12px;
+        border-radius: 20px;
+        background-color: #e0f2fe;
+        color: #0369a1;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    /* Salary */
+
+    .salary {
+        font-weight: 600;
+        color: #15803d;
+    }
+
+    /* View Button */
+
+    .view-button {
+        padding: 9px 16px;
+        border: none;
+        border-radius: 7px;
+        background-color: #2563eb;
+        color: white;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-block;
+        text-decoration: none;
+    }
+
+        .view-button:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.25);
+        }
+
+        .view-button:active {
+            transform: translateY(0);
+        }
+
+    /* View Button */
+
+    .add-button {
+        padding: 9px 16px;
+        border: none;
+        border-radius: 7px;
+        background-color: #2563eb;
+        color: white;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-block;
+        text-decoration: none;
+    }
+
+        .add-button:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.25);
+        }
+
+        .add-button:active {
+            transform: translateY(0);
+        }
+
+    /* Responsive */
+
+    @@media (max-width: 768px) {
+
+        .employee-container {
+            width: 95%;
+            margin: 25px auto;
+        }
+
+        .header h2 {
+            font-size: 24px;
+        }
+
+        .table-card {
+            padding: 15px;
+        }
+
+        .employee-table th,
+        .employee-table td {
+            padding: 10px;
+            font-size: 13px;
+        }
+
+        .view-button {
+            padding: 7px 10px;
+            font-size: 12px;
+        }
+
+        .add-button {
+            padding: 7px 10px;
+            font-size: 12px;
+        }
+    }
+
+</style>
+
+
+<div class="employee-container">
+
+    <!-- Header -->
+
+    <div class="header">
+        <div>
+            <h2>Employee List</h2>
+            <p>View and manage employee information</p>
+        </div>
+        <div>
+            <a href="@Url.Action("AddEmployee", "Employee")" class="add-button">
+                Add Employee
+            </a>
+        </div>
+    </div>
+
+
+    <!-- Table Card -->
+
+    <div class="table-card">
+
+        <table class="employee-table">
+
+            <thead>
+                <tr>
+                    <th>SR. No.</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Salary</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @{
+                    var index = 1;
+                }
+
+                @foreach (var employee in Model)
+                {
+                    <tr>
+
+                        <td class="serial-number">
+                            @index
+                        </td>
+
+                        <td class="employee-name">
+                            @employee.Name
+                        </td>
+
+                        <td>
+                            <span class="role-badge">
+                                @employee.Role
+                            </span>
+                        </td>
+
+                        <td class="salary">
+                            ₹ @employee.Salary.ToString("N0")
+                        </td>
+
+                        <td>
+                            @* <button type="button"
+                                    class="view-button"
+                                    onclick="View(@employee.Id)">
+                                View Employee
+                            </button> *@
+
+                            <button type="button"
+                                    class="view-button"
+                                    id="viewButton"
+                                    data-id="@employee.Id">
+                                View Employee
+                            </button>
+                            <button type="button"
+                                    class="update-button"
+                                    id="updateButton"
+                                    data-id="@employee.Id">
+                                Update Employee
+                            </button>
+                            <button type="button"
+                                    class="delete-button"
+                                    id="deleteButton"
+                                    data-id="@employee.Id">
+                                Delete Employee
+                            </button>
+                        </td>
+
+                    </tr>
+
+                    index++;
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+    // function View(id)
+    //     window.location.href =
+    //         '@Url.Action("ViewEmployee", "Employee")?id=' + id;
+    // });
+    $(".view-button").click(function () {
+        var id = $(this).data("id");
+        window.location.href = '@Url.Action("ViewEmployee", "Employee")?id=' + id;
+    });
+    $(".update-button").click(function () {
+        var id = $(this).data("id");
+        window.location.href = '@Url.Action("UpdateEmployee", "Employee")?id=' + id;
+    });
+
+    $(".delete-button").click(function () {
+        var id = $(this).data("id");
+
+        Swal.fire({
+            icon: "warning",
+            title: "Are you sure?",
+            text: "Do you want to delete this record?",
+            showCancelButton: true,
+            confirmButtonText: "Yes",
+            cancelButtonText: "No",
+            confirmButtonColor: "#dc2626",
+            cancelButtonColor: "#6b7280"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href ='@Url.Action("DeleteEmployee", "Employee")?id=' + id;
+            }
+
+        });
+    });
+    
+</script>
